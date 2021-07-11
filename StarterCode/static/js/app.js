@@ -2,20 +2,20 @@
 // Initialize the webpage when it first loads to show default data
 function init() {
 
+  var selector = d3.select('#selDataset');
+
   d3.json("../StarterCode/samples.json").then(data => {
     
     var sampleName = data.names;
+    sampleName.forEach(sample => {
+      selector.append('option')
+        .text(sample)
+        .property('value', sample)
+    });
 
     var initialSample = sampleName[0];
-
-    // console.log(initialSample);
     buildChart(initialSample);
   });
-  
-  
-
-  // buildChart(initSample);
-  // buildMetadata(initSample);
 }
 
 function buildMetadata(sample) {
@@ -30,17 +30,30 @@ function buildChart(sample) {
     var resultArray = samples.filter(sampleObj => sampleObj.id);
     var result = resultArray[0]
 
-    var otuIds = result.otuids;
-    var otuLabels = result.otuLabels;
+    var otuIds = result.otu_ids;
+    var otuLabels = result.otu_labels;
     var sampleValues = result.sample_values;
 
-    console.log(sampleValues);
+    var ytick = otuIds.slice(0,10).map(otuID => `OTU ${otuID}`)
+    
+    var barData = [
+      {
+        y: ytick,
+        x: sampleValues.slice(0,10).reverse(),
+        text: otuLabels.slice(0,10).reverse(), 
+        type: 'bar',
+        orientation: 'h'
+      }
+    ]
+
+    Plotly.newPlot('bar',barData);
 
   })
-  // console.log(sample);
 
 }
 
-
+function optionChanged(newSample) {
+  buildChart(newSample);
+}
 
 init();
