@@ -19,6 +19,7 @@ function init() {
     // Initialize webpage and bar chart with first set of data
     var initialSample = sampleNames[0];
     buildChart(initialSample);
+    buildMetadata(initialSample);
   });
 }
 
@@ -90,6 +91,23 @@ function buildChart(sample) {
 // Function to load data based on the dropdown option chosen by the user
 function optionChanged(newSample) {
   buildChart(newSample);
+  buildMetadata(newSample);
+}
+
+function buildMetadata(sample) {
+  d3.json("../Code/samples.json").then(data => {
+    var metaData = data.metadata;
+    var resultArray = metaData.filter(sampleObj => sampleObj.id == sample);
+    var result = resultArray[0];
+
+    var panel = d3.select("#sample-metadata");
+    panel.html("");
+
+    Object.entries(result).forEach(([key, value]) => {
+      panel.append("h6")
+        .text(`${key.toUpperCase()}: ${value}`)
+    })
+  })
 }
 
 init();
