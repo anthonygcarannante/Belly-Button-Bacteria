@@ -62,7 +62,7 @@ function buildChart(sample) {
 
     // Format and input data for bubble chart
     var bubbleFormat = {
-      title: "Bacteria Cultures per Sample Recorded",
+      title: `Bacteria Cultures per Sample Recorded in Test Subject ${sample}`,
       margin: {t: 0},
       hovermode: "closest",
       xaxis: {title: "OTU ID"},
