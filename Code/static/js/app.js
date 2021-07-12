@@ -100,9 +100,11 @@ function buildMetadata(sample) {
     var resultArray = metaData.filter(sampleObj => sampleObj.id == sample);
     var result = resultArray[0];
 
+    // Store variable for html class to append metadata info to
     var panel = d3.select("#sample-metadata");
     panel.html("");
 
+    // ForEach loop to display all metadata info for test subject chosen
     Object.entries(result).forEach(([key, value]) => {
       panel.append("h6")
         .text(`${key.toUpperCase()}: ${value}`)
