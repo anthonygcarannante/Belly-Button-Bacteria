@@ -38,11 +38,38 @@ function buildChart(sample) {
         x: sampleValues.slice(0,10).reverse(),
         text: otuLabels.slice(0,10).reverse(), 
         type: 'bar',
-        orientation: 'h'
+        orientation: 'h',
+        marker: {
+          color: 'rgb(100, 83, 50)'
+        }
       }
     ]
 
     Plotly.newPlot('bar',barData);
+
+    var bubbleFormat = {
+      title: "Bacteria Cultures per Sample Recorded",
+      margin: {t: 0},
+      hovermode: "closest",
+      xaxis: {title: "OTU ID"},
+      margin: {t: 30}
+    }
+    var bubbleData = [
+      {
+        x: otuIds,
+        y: sampleValues,
+        text: otuLabels,
+        mode: "markers",
+        marker: {
+          size: sampleValues,
+          color: otuIds,
+          colorscale: "darkmint"
+        }
+      }
+    ];
+
+    Plotly.newPlot("bubble", bubbleData, bubbleFormat);
+
   })
 }
 
