@@ -4,7 +4,7 @@ function init() {
 
   var selector = d3.select('#selDataset');
 
-  d3.json("../StarterCode/samples.json").then(data => {
+  d3.json("../Code/samples.json").then(data => {
     
     var sampleNames = data.names;
     sampleNames.forEach(sample => {
@@ -20,7 +20,7 @@ function init() {
 
 function buildChart(sample) {
 
-  d3.json("../StarterCode/samples.json").then(data => {
+  d3.json("../Code/samples.json").then(data => {
     
     var samples = data.samples;
     var resultArray = samples.filter(sampleObj => sampleObj.id == sample);
@@ -42,7 +42,6 @@ function buildChart(sample) {
       }
     ]
 
-    // console.log(result);
     Plotly.newPlot('bar',barData);
   })
 }
