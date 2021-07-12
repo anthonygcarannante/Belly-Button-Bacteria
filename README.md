@@ -6,7 +6,7 @@ Technologies Used: Plotly, D3, Javascript, HTML
 
 ## WebPage Preview
 
-Screen Shot 2021-07-12 at 11.29.24 AM
+<img src="../Images/webpagePreview" />
 
 ## Visualizations
 
