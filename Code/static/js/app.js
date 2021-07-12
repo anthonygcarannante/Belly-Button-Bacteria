@@ -2,10 +2,13 @@
 // Initialize the webpage when it first loads to show default data
 function init() {
 
+  // Select the dropdown selector class
   var selector = d3.select('#selDataset');
 
+  // Load data
   d3.json("../Code/samples.json").then(data => {
     
+    // Create downdown options for all test subjects with the ID number
     var sampleNames = data.names;
     sampleNames.forEach(sample => {
       selector.append("option")
@@ -13,15 +16,18 @@ function init() {
       .property("value", sample);
     })
 
-  var initialSample = sampleNames[0];
-  buildChart(initialSample);
+    // Initialize webpage and bar chart with first set of data
+    var initialSample = sampleNames[0];
+    buildChart(initialSample);
   });
 }
 
 function buildChart(sample) {
 
+  // Read in Data file
   d3.json("../Code/samples.json").then(data => {
     
+    // Store data from the Test Subject chosen from the drop down
     var samples = data.samples;
     var resultArray = samples.filter(sampleObj => sampleObj.id == sample);
     var result = resultArray[0]
@@ -30,8 +36,13 @@ function buildChart(sample) {
     var otuLabels = result.otu_labels;
     var sampleValues = result.sample_values;
 
+    // Format tick markers for y axis
     var ytick = otuIds.slice(0,10).map(otuID => `OTU ${otuID}`).reverse();
-    
+
+    // Format and input data for bar chart
+    var barLayout = {
+      title: `Top Bacteria Found in Test Subject ${sample}`,
+    }
     var barData = [
       {
         y: ytick,
@@ -45,8 +56,10 @@ function buildChart(sample) {
       }
     ]
 
-    Plotly.newPlot('bar',barData);
+    // Plot bar chart
+    Plotly.newPlot('bar',barData, barLayout);
 
+    // Format and input data for bubble chart
     var bubbleFormat = {
       title: "Bacteria Cultures per Sample Recorded",
       margin: {t: 0},
@@ -68,11 +81,13 @@ function buildChart(sample) {
       }
     ];
 
+    // Plot bubble chart
     Plotly.newPlot("bubble", bubbleData, bubbleFormat);
 
   })
 }
 
+// Function to load data based on the dropdown option chosen by the user
 function optionChanged(newSample) {
   buildChart(newSample);
 }
