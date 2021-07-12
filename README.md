@@ -1,12 +1,12 @@
 # Plotly-Challenge
 
-This repository is to display my Javascript knowledge with the addition of Plotly visualizations and D3. 
+This repository is to display my Javascript knowledge with the addition of Plotly visualizations and D3. The original dataset shows a study that measured the amount of bacteria found in a test subject's belly button. This webpage tells the story of that study.
 
 Technologies Used: Plotly, D3, Javascript, HTML
 
 ## WebPage Preview
 
-<img src="Screen Shot 2021-07-12 at 11.29.24 AM" />
+Screen Shot 2021-07-12 at 11.29.24 AM
 
 ## Visualizations
 
